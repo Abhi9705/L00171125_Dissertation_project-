@@ -19,11 +19,11 @@ jobs:
           ls 
           pwd
           cd /home/runner/work/L00171125_Dissertationproject/L00171125_Dissertationproject/WWA-frontend-master
-          npm install
+          npm install --force
       - name: Run Tests
         run: |
            cd /home/runner/work/L00171125_Dissertationproject/L00171125_Dissertationproject/WWA-frontend-master
-           npm test
+           npm run test
       - name: Run Linter
         run: |
           cd /home/runner/work/L00171125_Dissertationproject/L00171125_Dissertationproject/WWA-frontend-master
