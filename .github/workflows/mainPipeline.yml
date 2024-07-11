@@ -52,7 +52,7 @@ jobs:
   
   IAC_Build:
     runs-on: ubuntu-latest
-    needs: [Build_docker_Image]
+   # needs: [Build_docker_Image]
     permissions: write-all
     outputs:
      target_url: ${{ steps.running-terraform-commands.outputs.target }}
