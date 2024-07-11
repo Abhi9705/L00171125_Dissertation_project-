@@ -15,11 +15,17 @@ jobs:
       - name: Checkout code 
         uses: actions/checkout@v4
       - name: Install Dependencies
-        run: npm install
+        run: |
+          cd /home/runner/work/DevOps2023-2024-Group3/DevOps2023-2024-Group3/WWA-frontend-master
+          npm install
       - name: Run Tests
-        run: npm test
+        run: |
+           cd /home/runner/work/DevOps2023-2024-Group3/DevOps2023-2024-Group3/WWA-frontend-master
+           npm test
       - name: Run Linter
-        run: npx eslint .
+        run: |
+          cd /home/runner/work/DevOps2023-2024-Group3/DevOps2023-2024-Group3/WWA-frontend-master
+          npx eslint .
 
   Build_docker_Images:
     runs-on: ubuntu-latest
