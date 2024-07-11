@@ -18,15 +18,15 @@ jobs:
         run: |
           ls 
           pwd
-          cd /home/runner/work/L00171125_Dissertationproject/DevOps2023-2024-Group3/WWA-frontend-master
+          cd /home/runner/work/L00171125_Dissertationproject/L00171125_Dissertationproject/WWA-frontend-master
           npm install
       - name: Run Tests
         run: |
-           cd /home/runner/work/L00171125_Dissertationproject/DevOps2023-2024-Group3/WWA-frontend-master
+           cd /home/runner/work/L00171125_Dissertationproject/L00171125_Dissertationproject/WWA-frontend-master
            npm test
       - name: Run Linter
         run: |
-          cd /home/runner/work/L00171125_Dissertationproject/DevOps2023-2024-Group3/WWA-frontend-master
+          cd /home/runner/work/L00171125_Dissertationproject/L00171125_Dissertationproject/WWA-frontend-master
           npx eslint .
 
   Build_docker_Images:
