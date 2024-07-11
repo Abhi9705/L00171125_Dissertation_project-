@@ -3,14 +3,27 @@ name: frontend-master-workflow
 on: 
   push:
     branches:
-      - dev-L00171125-Abhishek-DGW-132
+      - L00171125_dissertation
  # pull_request:
    # types:
     #  - "opened"
 jobs:
-  Build_docker_Image:
+
+  ShiftLeft_test:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout code 
+        uses: actions/checkout@v4
+      - name: Install Dependencies
+        run: npm install
+      - name: Run Tests
+        run: npm test
+      - name: Run Linter
+        run: npx eslint .
+
+  Build_docker_Images:
+    runs-on: ubuntu-latest
+    steps:   
       - name: Checkout codes
         uses: actions/checkout@v4
       - name: Sign in to Docker Hub
