@@ -8,8 +8,8 @@ module.exports = [
       },
       rules: {
         "no-console": "off",
-        "semi": ["error", "always"],
-        "quotes": ["error", "double"]
+        "semi": ["error", "never"],
+        "quotes": ["error", "single"]
       },
       linterOptions: {
         reportUnusedDisableDirectives: true
