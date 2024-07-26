@@ -28,7 +28,9 @@ jobs:
         run: |
           cd /home/runner/work/L00171125_Dissertationproject/L00171125_Dissertationproject/WWA-backend-master
           npm install eslint --save-dev 
-          npx eslint .
+          npx eslint . --fix
+         # npm install --save-dev prettier eslint-config-prettier eslint-plugin-prettier
+          
 
   Build_docker_Images:
     runs-on: ubuntu-latest
