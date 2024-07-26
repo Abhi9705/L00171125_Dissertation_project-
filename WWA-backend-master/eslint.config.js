@@ -1,4 +1,3 @@
-// eslint.config.js
 module.exports = [
     {
       files: ["**/*.js"],
@@ -7,9 +6,9 @@ module.exports = [
         sourceType: "module"
       },
       rules: {
+        "quotes": ["error", "single", { "avoidEscape": true, "allowTemplateLiterals": true }],
+        "semi": "off", // Disable the semicolon rule
         "no-console": "off",
-        "semi": ["error", "never"],
-        "quotes": ["error", "single"]
       },
       linterOptions: {
         reportUnusedDisableDirectives: true
