@@ -27,6 +27,7 @@ jobs:
       - name: Run Linter
         run: |
           cd /home/runner/work/L00171125_Dissertationproject/L00171125_Dissertationproject/WWA-backend-master
+          npm install eslint --save-dev 
           npx eslint .
 
   Build_docker_Images:
