@@ -6,8 +6,8 @@ module.exports = [
         sourceType: "module"
       },
       rules: {
-        "quotes": ["error", "single", { "avoidEscape": true, "allowTemplateLiterals": true }],
-        "semi": "off", // Disable the semicolon rule
+        "quotes": ["error", "double"],  // Change to 'double' for double quotes
+        "semi": ["error", "always"],    // Change to 'always' to enforce semicolons
         "no-console": "off",
       },
       linterOptions: {
