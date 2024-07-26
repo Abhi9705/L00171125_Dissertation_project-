@@ -13,7 +13,6 @@ module.exports = {
       "eqeqeq": ["error", "always"],
       "no-trailing-spaces": "error",
       "curly": ["error", "all"],
-      "max-len": ["error", { "code": 80 }],
       "prefer-const": "error",
       "no-var": "error"
     },
