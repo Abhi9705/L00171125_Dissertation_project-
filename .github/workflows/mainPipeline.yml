@@ -42,7 +42,7 @@ jobs:
         ./gradlew clean build
         ls build/libs
 
-    - name: Update Email Configuration
+    - name: Update Email Configurations
       run: |
         cd /home/ubuntu
         cd SimianArmy
