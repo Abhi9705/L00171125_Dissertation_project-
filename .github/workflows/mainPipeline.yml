@@ -34,14 +34,14 @@ jobs:
   Chaos_Engineering:
    runs-on: self-hosted
    steps:
-    - name: Run Chaos Monkey test 
+    - name: Run Chaos Monkey 
       run: |
         cd /home/ubuntu
         cd SimianArmy
         ./gradlew build
         ls build/libs
         ./gradlew jettyRunWar
-                  
+
   Build_docker_Images:
     runs-on: ubuntu-latest
     needs: ShiftLeft_test
