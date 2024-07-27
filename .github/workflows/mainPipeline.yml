@@ -40,9 +40,8 @@ jobs:
         cd SimianArmy
         ./gradlew build
         ls build/libs
-        JAVA_OPTS=-Dsimianarmy.properties=/home/ubuntu/SimianArmy/src/main/resources/simianarmy.properties java -jar build/libs/simianarmy.jar
-
-          
+        ./gradlew jettyRunWar
+                  
   Build_docker_Images:
     runs-on: ubuntu-latest
     needs: ShiftLeft_test
