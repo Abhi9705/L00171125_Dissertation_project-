@@ -39,7 +39,8 @@ jobs:
         cd /home/ubuntu
         cd SimianArmy
         ./gradlew build
-        JAVA_OPTS=-Dsimianarmy.properties=/home/ubuntu/SimianArmy/src/main/resources/simianarmy.properties ./gradlew run
+        ls build/libs
+        JAVA_OPTS=-Dsimianarmy.properties=/home/ubuntu/SimianArmy/src/main/resources/simianarmy.properties java -jar build/libs/simianarmy.jar
 
           
   Build_docker_Images:
