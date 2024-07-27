@@ -41,15 +41,16 @@ jobs:
         cd SimianArmy
         ./gradlew build
         ls build/libs
-      # ./gradlew jettyRunWar
 
     - name: Update Email Configuration
       run: |
-       echo "Updating email configuration..."
-       echo "simianarmy.client.recorder.janitor.recipient = L00171125@atu.ie" >> /home/ubuntu/SimianArmy/src/main/resources/simianarmy.properties
+        cd /home/ubuntu
+        cd SimianArmy
+        echo "Updating email configuration..."
+        echo "simianarmy.client.recorder.janitor.recipient = L00171125@atu.ie" >> /home/ubuntu/SimianArmy/src/main/resources/simianarmy.properties
          echo "Verifying email configuration..."
           grep 'simianarmy.client.recorder.janitor.recipient' /home/ubuntu/SimianArmy/src/main/resources/simianarmy.properties
-
+          ./gradlew jettyRunWar
   Build_docker_Images:
     runs-on: ubuntu-latest
     needs: ShiftLeft_test
