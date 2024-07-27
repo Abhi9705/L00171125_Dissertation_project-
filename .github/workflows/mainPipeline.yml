@@ -34,7 +34,6 @@ jobs:
   Chaos_Engineering:
    runs-on: self-hosted
    steps:
-    - uses: actions/checkout@v4
     - name: Run Chaos Monkey
       run: |
         ls
