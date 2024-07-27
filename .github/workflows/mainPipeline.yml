@@ -52,7 +52,6 @@ jobs:
       run: |
           cd /home/ubuntu
           cd SimianArmy
-          cp build/libs/simianarmy-2.6.0-SNAPSHOT.war /var/lib/jetty/webapps/
           sudo service jetty start
           sleep 60  # Wait for Jetty to start
           sudo service jetty status
