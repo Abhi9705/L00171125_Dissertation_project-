@@ -47,16 +47,7 @@ jobs:
       run: |
        echo "Updating email configuration..."
        echo "simianarmy.client.recorder.janitor.recipient = L00171125@atu.ie" >> /home/ubuntu/SimianArmy/src/main/resources/simianarmy.properties
-
-    - name: Deploy WAR Files
-      run: |
-          cd /home/ubuntu
-          cd SimianArmy
-          sudo service jetty start
-          sleep 60  # Wait for Jetty to start
-          sudo service jetty status
-          sudo tail -f /var/log/jetty/jetty.log
-          echo "Verifying email configuration..."
+         echo "Verifying email configuration..."
           grep 'simianarmy.client.recorder.janitor.recipient' /home/ubuntu/SimianArmy/src/main/resources/simianarmy.properties
 
   Build_docker_Images:
