@@ -34,13 +34,38 @@ jobs:
   Chaos_Engineering:
    runs-on: self-hosted
    steps:
+
     - name: Run Chaos Monkey  test 
       run: |
         cd /home/ubuntu
         cd SimianArmy
         ./gradlew build
         ls build/libs
-        ./gradlew jettyRunWar
+      # ./gradlew jettyRunWar
+
+    - name: Update Email Configuration
+      run: |
+       echo "Updating email configuration..."
+       echo "simianarmy.client.recorder.janitor.recipient = L00171125@atu.ie" >> /home/ubuntu/SimianArmy/src/main/resources/simianarmy.properties
+
+    - name: Deploy WAR File
+      run: |
+          cp build/libs/simianarmy-2.6.0-SNAPSHOT.war /var/lib/jetty/webapps/
+          sudo service jetty start
+          sleep 60  # Wait for Jetty to start
+
+    - name: Check Jetty Status
+      run: |
+          sudo service jetty status
+
+    - name: Check Logs
+      run: |
+          sudo tail -f /var/log/jetty/jetty.log
+
+    - name: Verify Email Configuration
+      run: |
+          echo "Verifying email configuration..."
+          grep 'simianarmy.client.recorder.janitor.recipient' /home/ubuntu/SimianArmy/src/main/resources/simianarmy.properties
 
   Build_docker_Images:
     runs-on: ubuntu-latest
