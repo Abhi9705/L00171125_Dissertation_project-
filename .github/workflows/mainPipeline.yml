@@ -35,7 +35,7 @@ jobs:
    runs-on: self-hosted
    steps:
 
-    - name: Run Chaos Monkey  test 
+    - name: Run Chaos Monkey  test s
       run: |
         cd /home/ubuntu
         cd SimianArmy
