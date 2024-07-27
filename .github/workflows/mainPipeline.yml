@@ -38,6 +38,7 @@ jobs:
       run: |
         ls
         pwd
+        cd /home/ubuntu
         cd SimianArmy
         ./gradlew build
         JAVA_OPTS=-Dsimianarmy.properties=/path/to/your/simianarmy.properties ./gradlew run
