@@ -48,7 +48,7 @@ jobs:
        echo "Updating email configuration..."
        echo "simianarmy.client.recorder.janitor.recipient = L00171125@atu.ie" >> /home/ubuntu/SimianArmy/src/main/resources/simianarmy.properties
 
-    - name: Deploy WAR File
+    - name: Deploy WAR Files
       run: |
           cd /home/ubuntu
           cd SimianArmy
