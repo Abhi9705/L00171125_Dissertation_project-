@@ -50,20 +50,13 @@ jobs:
 
     - name: Deploy WAR File
       run: |
+          cd /home/ubuntu
+          cd SimianArmy
           cp build/libs/simianarmy-2.6.0-SNAPSHOT.war /var/lib/jetty/webapps/
           sudo service jetty start
           sleep 60  # Wait for Jetty to start
-
-    - name: Check Jetty Status
-      run: |
           sudo service jetty status
-
-    - name: Check Logs
-      run: |
           sudo tail -f /var/log/jetty/jetty.log
-
-    - name: Verify Email Configuration
-      run: |
           echo "Verifying email configuration..."
           grep 'simianarmy.client.recorder.janitor.recipient' /home/ubuntu/SimianArmy/src/main/resources/simianarmy.properties
 
