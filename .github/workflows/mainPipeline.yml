@@ -35,7 +35,7 @@ jobs:
    runs-on: self-hosted
    steps:
 
-    - name: Run Chaos Monkey  test s
+    - name: Run Chaos Monkey  test 
    
       run: |
         cd /home/ubuntu
