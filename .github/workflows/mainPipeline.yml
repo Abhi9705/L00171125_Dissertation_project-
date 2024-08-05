@@ -64,8 +64,6 @@ jobs:
       - name: Running application on Stagging environment 
         run: |
           sudo docker pull wwag3/wednesdaywickedadventures:latest
-          sudo docker stop forntend
-          sudo docker rm forntend
           sudo docker run -d -p 3000:3000 --name forntend wwag3/wednesdaywickedadventures:latest
 
   Chaos_Engineering:
