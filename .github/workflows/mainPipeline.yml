@@ -61,9 +61,23 @@ jobs:
     runs-on: self-hosted
     needs: Build_docker_Images
     steps:
+      - name: removing Disk space 
+        run: |
+         sudo docker system prune -a -f --volumes
+ 
       - name: Running application on Stagging environment 
         run: |
-          sudo docker pull wwag3/wednesdaywickedadventures:latest
+          echo "will run when new images is published"    
+         # sudo docker pull wwag3/wednesdaywickedadventures:latest
+      - name: Kill and Remove Existing Container
+        run: |
+          if [ "$(sudo docker ps -q -f name=frontend)" ]; then
+            sudo docker kill frontend
+          fi
+          if [ "$(sudo docker ps -aq -f name=frontend)" ]; then
+             sudo docker stop frontend
+            sudo docker rm frontend
+          fi
           sudo docker run -d -p 3000:3000 --name forntend wwag3/wednesdaywickedadventures:latest
 
   Chaos_Engineering:
