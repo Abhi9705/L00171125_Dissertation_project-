@@ -32,26 +32,22 @@ jobs:
          # npm install --save-dev prettier eslint-config-prettier eslint-plugin-prettier
 
   Chaos_Engineering:
-   runs-on: self-hosted
-   steps:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: eu-west-1
+      - name: Trigger FIS Experiment
+        run: |
+          aws fis start-experiment --experiment-template-id EXTBY5y1A6MqkfjXn
 
-    - name: Run Chaos Monkey  test 
-   
-      run: |
-        cd /home/ubuntu
-        cd SimianArmy
-        ./gradlew clean build
-        ls build/libs
 
-    - name: Updates Email Configurations
-      run: |
-        cd /home/ubuntu
-        cd SimianArmy
-        echo "Updating email configuration..."
-        echo "simianarmy.client.recorder.janitor.recipient = L00171125@atu.ie" >> /home/ubuntu/SimianArmy/src/main/resources/simianarmy.properties
-         echo "Verifying email configuration..."
-          grep 'simianarmy.client.recorder.janitor.recipient' /home/ubuntu/SimianArmy/src/main/resources/simianarmy.properties
-          ./gradlew jettyRunWar
+
+
+
   Build_docker_Images:
     runs-on: ubuntu-latest
     needs: ShiftLeft_test
