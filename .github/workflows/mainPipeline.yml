@@ -62,7 +62,7 @@ jobs:
             sleep 10
           done
 
-      - name: Wait for EC2 Instance to Return to Runnings
+      - name: Wait for EC2 Instance to Return to Running
         run: |
           INSTANCE_ID= i-0609b0b289067d17d
           aws ec2 wait instance-running --instance-ids $INSTANCE_ID
