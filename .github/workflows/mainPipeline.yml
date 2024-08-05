@@ -40,11 +40,32 @@ jobs:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: eu-west-1
-      - name: Trigger FIS Experime
+
+      - name: Trigger FIS Experiment
+        id: start_fis
         run: |
-          aws fis start-experiment --experiment-template-id EXTBY5y1A6MqkfjXn
+          FIS_EXP_ID=$(aws fis start-experiment --experiment-template-id EXTBY5y1A6MqkfjXn --query 'experiment.id' --output text)
+          echo "FIS_EXP_ID=$FIS_EXP_ID" >> $GITHUB_ENV
 
+      - name: Wait for FIS Experiment to Complete
+        run: |
+          FIS_EXP_ID=${{ env.FIS_EXP_ID }}
+          while true; do
+            STATUS=$(aws fis get-experiment --id $FIS_EXP_ID --query 'experiment.state.status' --output text)
+            echo "Current experiment status: $STATUS"
+            if [ "$STATUS" == "completed" ]; then
+              break
+            elif [ "$STATUS" == "failed" ] || [ "$STATUS" == "stopped" ]; then
+              echo "Experiment $FIS_EXP_ID did not complete successfully. Status: $STATUS"
+              exit 1
+            fi
+            sleep 10
+          done
 
+      - name: Wait for EC2 Instance to Return to Running
+        run: |
+          INSTANCE_ID= i-0609b0b289067d17d
+          aws ec2 wait instance-running --instance-ids $INSTANCE_ID
 
 
 
