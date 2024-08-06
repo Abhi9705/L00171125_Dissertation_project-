@@ -156,11 +156,9 @@ jobs:
 
       - name: Running Terraform Commands
         id: running-terraform-commands
-       # working-directory: ./terraform
+        working-directory: ./terraform
         run: |
-         pwd
-         ls
-         cd /home/runner/work/L00171125_Dissertationproject/L00171125_Dissertationprojectterraform
+         cd /home/runner/work/L00171125_Dissertationproject/L00171125_Dissertationproject/terraform
          terraform init
          terraform validate -no-color
          terraform plan
