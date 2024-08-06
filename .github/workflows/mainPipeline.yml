@@ -135,7 +135,7 @@ jobs:
   
   IAC_Build:
     runs-on: ubuntu-latest
-    needs: [Chaos_Engineering,Running_Stagging]
+    needs: [Chaos_Engineering,Running_Stagging_Environment]
     permissions: write-all
     outputs:
      target_url: ${{ steps.running-terraform-commands.outputs.target }}
