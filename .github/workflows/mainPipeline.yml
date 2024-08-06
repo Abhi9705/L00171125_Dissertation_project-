@@ -135,7 +135,7 @@ jobs:
   
   IAC_Build:
     runs-on: ubuntu-latest
-    needs: [Chaos_Engineering,Running_Stagging_Environment]
+   # needs: [Chaos_Engineering]
     permissions: write-all
     outputs:
      target_url: ${{ steps.running-terraform-commands.outputs.target }}
@@ -147,7 +147,7 @@ jobs:
         with:
           aws-access-key-id: ${{secrets.AWS_ACCESS_KEY_ID}}
           aws-secret-access-key: ${{secrets.AWS_SECRET_ACCESS_KEY}}
-          aws-region: ${{secrets.AWS_REGION}}
+        #  aws-region: ${{secrets.AWS_REGION}}
 
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3
@@ -217,78 +217,6 @@ jobs:
      # - name: building backend container
       #  run: sudo docker run --name wwabackendapp -p 5000:5000 -d  wwag3/wednesdaywickedadventures:backend
  # sudo docker system prune --all --force --volumes, docker system prune -a -y
- 
-  sonarqube_analysis:
-    runs-on: ubuntu-latest
-    needs: [SonarCloudScan]
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '18'
-      - name: Install dependencies
-        run: cd WWA-backend-master && npm install
-      - name: Run Jest tests with coverage
-        run: cd WWA-backend-master && npm test -- --coverage || true
-        # Run tests with coverage, ignoring failures with '|| true'
-      - name: Set up JDK 17
-        uses: actions/setup-java@v2
-        with:
-          java-version: '17'
-          distribution: 'adopt'
-      - name: SonarQube Scan
-        uses: SonarSource/sonarqube-scan-action@7295e71c9583053f5bf40e9d4068a0c974603ec8
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
-        with:
-          args:
-            -Dsonar.projectKey=group2
-            -Dsonar.sources=.
-            -Dsonar.host.url=${{ secrets.SONAR_HOST_URL }}
-            -Dsonar.login=${{ secrets.SONAR_TOKEN }}
-            -Dsonar.javascript.lcov.reportPaths=WWA-backend-master/coverage/lcov.info
-            # Add other SonarQube analysis parameters as needed
-
-  Automated_Document:
-    runs-on: ubuntu-latest
-    needs: [ sonarqube_analysis]
-    steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
-
-    - name: Setup Node.js
-      uses: actions/setup-node@v2
-      with:
-        node-version: '14.x'
-
-    - name: Install dependencies
-      run: npm install
-
-    - name: Install JSDoc
-      run: |
-       cd /home/runner/work/DevOps2023-2024-Group3/DevOps2023-2024-Group3/WWA-frontend-master
-       npm i -g jsdoc
-
-    - name: Install docdash Theam
-      run: |
-       cd /home/runner/work/DevOps2023-2024-Group3/DevOps2023-2024-Group3/WWA-frontend-master
-       npm i docdash
-
-    - name: Generate JSDocs
-      run: |
-          cd /home/runner/work/DevOps2023-2024-Group3/DevOps2023-2024-Group3/WWA-frontend-master
-          npm run docs
-
-    - name: Commit and push change
-      uses: stefanzweifel/git-auto-commit-action@v4
-      with:
-        commit_message: Update documentation
-        branch: dev-L00171125-Abhishek-DGW-132
-
 
   SonarCloudScan:
     runs-on: ubuntu-latest
