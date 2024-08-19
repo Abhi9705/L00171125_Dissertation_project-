@@ -11,6 +11,9 @@ jobs:
 
   ShiftLeft_test:
     runs-on: ubuntu-latest
+    permissions:
+     actions: write
+     security-events: write
     steps:
       - name: Checkout codes 
         uses: actions/checkout@v4
@@ -44,18 +47,11 @@ jobs:
         run: npm install -g snyk
 
       - name: Snyk Security Scans
-        run: snyk test --org=Abhi9705 --project-name='L00171125_Dissertationproject'
-        continue-on-error: true
-        env:
-          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
-        working-directory: WWA-backend-master
-
-      - name: Snyk Security Scan Frontend
         run: snyk test --org=abhi9705 --project-name='L00171125_Dissertationproject'
         continue-on-error: true
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
-        working-directory: WWA-frontend-master
+        working-directory: WWA-backend-master
                 
       - name: Snyk Monitor
         run: snyk monitor  --project-name='L00171125_Dissertationproject'
