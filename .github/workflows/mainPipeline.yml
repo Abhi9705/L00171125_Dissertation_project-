@@ -19,7 +19,7 @@ jobs:
           ls 
           pwd
           cd /home/runner/work/L00171125_Dissertationproject/L00171125_Dissertationproject/WWA-backend-master
-          npm install --force
+          npm install --force --save-dev jest
       - name: Run Tests
         run: |
            cd /home/runner/work/L00171125_Dissertationproject/L00171125_Dissertationproject/WWA-backend-master
