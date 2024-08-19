@@ -11,6 +11,7 @@ jobs:
 
   ShiftLeft_test:
     runs-on: ubuntu-latest
+    needs: SonarCloudScan
     permissions:
      actions: write
      security-events: write
@@ -81,6 +82,44 @@ jobs:
         with:
           sarif_file: snyk.sarif
           category: 'Snyk OpenSource Unique Category'
+
+  
+
+  SonarCloudScan:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4   
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '16'
+      - name: Install dependencies
+        run: cd WWA-backend-master && npm install
+      - name: Run Jest tests with coverage
+        run: cd WWA-backend-master && npm test -- --coverage || true
+        # Run tests with coverage, ignoring failures with '|| true'
+      - name: Set up JDK 17
+        uses: actions/setup-java@v2
+        with:
+          java-version: '11'
+          distribution: 'adopt'
+ 
+      - name: SonarCloud Scan
+        # uses: sonarsource/sonarcloud-github-action@master
+        uses: SonarSource/sonarcloud-github-action@master
+        # uses: SonarSource/sonarcloud-github-action@de2e56b42aa84d0b1c5b622644ac17e505c9a049
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONARCLOUD_TOKEN }}
+        with:
+          args: >
+            -Dsonar.organization=Abhishek
+            -Dsonar.projectKey=abhi9705_L00171125_Dissertationproject
+            -Dsonar.sources=.
+            -Dsonar.login=${{ secrets.SONARCLOUD_TOKEN }}
+            -Dsonar.javascript.lcov.reportPaths=WWA-backend-master/coverage/lcov.info
+
 
 
 
@@ -270,39 +309,5 @@ jobs:
       #  run: sudo docker run --name wwabackendapp -p 5000:5000 -d  wwag3/wednesdaywickedadventures:backend
  # sudo docker system prune --all --force --volumes, docker system prune -a -y
 
-  SonarCloudScan:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4   
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '16'
-      - name: Install dependencies
-        run: cd WWA-backend-master && npm install
-      - name: Run Jest tests with coverage
-        run: cd WWA-backend-master && npm test -- --coverage || true
-        # Run tests with coverage, ignoring failures with '|| true'
-      - name: Set up JDK 17
-        uses: actions/setup-java@v2
-        with:
-          java-version: '11'
-          distribution: 'adopt'
  
-      - name: SonarCloud Scan
-        # uses: sonarsource/sonarcloud-github-action@master
-        uses: SonarSource/sonarcloud-github-action@master
-        # uses: SonarSource/sonarcloud-github-action@de2e56b42aa84d0b1c5b622644ac17e505c9a049
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          SONAR_TOKEN: ${{ secrets.SONARCLOUD_TOKEN }}
-        with:
-          args: >
-            -Dsonar.organization=wwag3
-            -Dsonar.projectKey=shreyashettys202_DevOps2023-2024-Group3
-            -Dsonar.sources=.
-            -Dsonar.login=${{ secrets.SONARCLOUD_TOKEN }}
-            -Dsonar.javascript.lcov.reportPaths=WWA-backend-master/coverage/lcov.info
-
 
