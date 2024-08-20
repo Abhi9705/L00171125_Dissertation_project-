@@ -114,8 +114,8 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONARCLOUD_TOKEN }}
         with:
           args: >
-            -Dsonar.organization=Abhishek
-            -Dsonar.projectKey=L00171125_Dissertationproject
+            -Dsonar.organization=abhi9705
+            -Dsonar.projectKey=Abhishek_L00171125_Dissertationproject
             -Dsonar.sources=.
             -Dsonar.login=${{ secrets.SONARCLOUD_TOKEN }}
             -Dsonar.javascript.lcov.reportPaths=WWA-backend-master/coverage/lcov.info
