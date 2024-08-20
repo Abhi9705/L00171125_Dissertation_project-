@@ -129,6 +129,12 @@ jobs:
             -Dsonar.login=${{ secrets.SONARCLOUD_TOKEN }}
             -Dsonar.javascript.lcov.reportPaths=WWA-backend-master/coverage/lcov.info
 
+      - name: Upload SonarCloud Report
+        uses: actions/upload-artifact@v2
+        with:
+         name: sonarcloud-report
+         path:  /home/runner/work/L00171125_Dissertationproject/L00171125_Dissertationproject
+
 
 
 
