@@ -114,7 +114,7 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONARCLOUD_TOKEN }}
         with:
           args: >
-            -Dsonar.organization=Abhishek
+            -Dsonar.organization=abhi9705
             -Dsonar.projectKey=Abhi9705_L00171125_Dissertationproject
             -Dsonar.sources=.
             -Dsonar.login=${{ secrets.SONARCLOUD_TOKEN }}
