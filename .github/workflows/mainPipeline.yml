@@ -41,7 +41,8 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
          name: eslint-report
-         path: eslint-report.json
+         path: /home/runner/work/L00171125_Dissertationproject/L00171125_Dissertationproject/WWA-backend-master
+         if-no-files-found: warn
           
 # Snyk security scan step for web
 
