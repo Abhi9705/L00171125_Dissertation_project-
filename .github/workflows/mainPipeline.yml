@@ -192,12 +192,13 @@ jobs:
         id: start_fis
         run: |
           for i in {1..2}; do
+          cd /home/runner/work/L00171125_Dissertationproject/L00171125_Dissertationproject/WWA-backend-master
           echo "Running Chaos Engineering Experiment Iteration #$i"
           FIS_EXP_ID=$(aws fis start-experiment --experiment-template-id EXTBY5y1A6MqkfjXn --query 'experiment.id' --output text)
           echo "FIS_EXP_ID=$FIS_EXP_ID" >> $GITHUB_ENV
 
           echo "Start MTTR Script" 
-          ls
+
           chmod +x ./measure_mttr.sh
            ./measure_mttr.sh &
           echo "Wait for FIS Experiment to Complete"
