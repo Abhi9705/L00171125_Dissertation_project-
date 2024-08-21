@@ -190,7 +190,7 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: eu-west-1
 
-      - name: Trigger FIS Experiment
+      - name: Trigger FIS Experiments
         id: start_fis
         run: |
           for i in {1..2}; do
