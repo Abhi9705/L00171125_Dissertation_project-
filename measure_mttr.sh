@@ -1,5 +1,8 @@
 #!/bin/bash
 
+
+FIS_EXP_ID=$1
+
 # Capture the start time
 START_TIME=$(date +%s)
 echo "MTTR Start Time: $(date -d @$START_TIME)"
