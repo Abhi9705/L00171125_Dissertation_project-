@@ -252,7 +252,7 @@ jobs:
               echo "Instance $INSTANCE_ID is back to running."
               break
             fi
-            sleep 10  
+            sleep 15  
            done
 
            echo "Iteration #$i completed."
