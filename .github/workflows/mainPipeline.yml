@@ -226,7 +226,7 @@ jobs:
             FIS_EXP_ID=${{ env.FIS_EXP_ID }}
            
             while true; do
-              STATUS=$(aws fis get-experiment --id "$FIS_EXP_ID" --query 'experiment.state.status' --output text)
+              STATUS=$(aws fis get-experiment --id $FIS_EXP_ID --query 'experiment.state.status' --output text)
               if [ -z "$STATUS" ]; then
                 echo "Failed to get experiment status. Exiting."
                 exit 1
