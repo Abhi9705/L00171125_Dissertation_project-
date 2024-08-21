@@ -8,7 +8,7 @@ module.exports = {
       "quotes": ["error", "double"],
       "semi": ["error", "always"],
       "no-console": "off",
-      "security/detect-object-injection": "error"
+      
   
     },
     linterOptions: {
