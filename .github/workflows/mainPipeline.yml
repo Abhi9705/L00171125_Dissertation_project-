@@ -203,7 +203,7 @@ jobs:
           for i in {1..2}; do
            echo "Running Chaos Engineering Experiment Iteration #$i"
            FIS_EXP_ID=$(aws fis start-experiment --experiment-template-id EXTBY5y1A6MqkfjXn --query 'experiment.id' --output text)
-          
+           echo "FIS_EXP_ID=$FIS_EXP_ID" >> $GITHUB_ENV
           
             if [ -z "$FIS_EXP_ID" ]; then
               echo "Failed to start experiment. Exiting."
