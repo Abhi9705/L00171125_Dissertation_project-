@@ -181,6 +181,8 @@ jobs:
     runs-on: ubuntu-latest
   #  needs: Running_Stagging_Environment
     steps:
+      - name: Checkout codes
+        uses: actions/checkout@v4
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
