@@ -4,13 +4,6 @@
 FIS_EXP_ID=$1
 echo "FIS_EXP_ID in measure_mttr: $FIS_EXP_ID"
 
-# Debugging: Check if FIS_EXP_ID is set
-if [ -z $FIS_EXP_ID ]; then
-  echo "FIS_EXP_ID is not set. Exiting."
-  exit 1
-fi
-
-echo "FIS_EXP_ID: $FIS_EXP_ID"
 
 # Capture the start time
 START_TIME=$(date +%s)
