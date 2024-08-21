@@ -197,7 +197,8 @@ jobs:
           echo "FIS_EXP_ID=$FIS_EXP_ID" >> $GITHUB_ENV
 
           echo "Start MTTR Script" 
-        
+          ls 
+          pwd
           cd /home/runner/work/L00171125_Dissertationproject/L00171125_Dissertationproject/WWA-backend-master
           chmod +x ./measure_mttr.sh
            ./measure_mttr.sh &
