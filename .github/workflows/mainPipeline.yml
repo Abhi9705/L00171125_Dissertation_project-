@@ -211,11 +211,7 @@ jobs:
             fi
             echo "FIS_EXP_ID=$FIS_EXP_ID"
 
- 
 
-           echo "Start MTTR Scriptss" 
-           chmod +x ./measure_mttr.sh
-           ./measure_mttr.sh "$FIS_EXP_ID" &
 
 
             echo "Wait for FIS Experiment to Complete"
@@ -224,6 +220,9 @@ jobs:
             INSTANCE_STATUS=$(aws ec2 describe-instances --instance-ids $INSTANCE_ID --query 'Reservations[0].Instances[0].State.Name' --output text)
             echo "Current instance status: $INSTANCE_STATUS"
            
+           echo "Start MTTR Scriptss" 
+           chmod +x ./measure_mttr.sh
+           ./measure_mttr.sh "$FIS_EXP_ID" &
            
             while true; do
               STATUS=$(aws fis get-experiment --id "$FIS_EXP_ID" --query 'experiment.state.status' --output text)
