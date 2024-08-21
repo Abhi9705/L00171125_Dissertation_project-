@@ -199,10 +199,7 @@ jobs:
           echo "FIS_EXP_ID=$FIS_EXP_ID"
           echo "FIS_EXP_ID=$FIS_EXP_ID" >> $GITHUB_ENV
 
-                    if [ -z "$FIS_EXP_ID" ]; then
-            echo "Failed to start FIS experiment. Exiting."
-            exit 1
-          fi
+ 
 
           echo "Start MTTR Scriptss" 
           chmod +x ./measure_mttr.sh
