@@ -196,14 +196,13 @@ jobs:
           FIS_EXP_ID=$(aws fis start-experiment --experiment-template-id EXTBY5y1A6MqkfjXn --query 'experiment.id' --output text)
           echo "FIS_EXP_ID=$FIS_EXP_ID" >> $GITHUB_ENV
 
-      - name: Start MTTR Script
-        run: |
+          echo "Start MTTR Script" 
+        
           cd /home/runner/work/L00171125_Dissertationproject/L00171125_Dissertationproject/WWA-backend-master
           chmod +x ./measure_mttr.sh
            ./measure_mttr.sh &
 
-      - name: Wait for FIS Experiment to Complete
-        run: |
+          echo "Wait for FIS Experiment to Complete"
             INSTANCE_ID=i-0609b0b289067d17d
             INSTANCE_STATUS=$(aws ec2 describe-instances --instance-ids $INSTANCE_ID --query 'Reservations[0].Instances[0].State.Name' --output text)
             echo "Current instance status: $INSTANCE_STATUS"
@@ -223,9 +222,8 @@ jobs:
             sleep 10
             done
 
-      - name: Wait for EC2 Instance to Return to Running
-        run: |
-          INSTANCE_ID=i-0609b0b289067d17d
+          echo "Wait for EC2 Instance to Return to Running" 
+            INSTANCE_ID=i-0609b0b289067d17d
             while true; do
             INSTANCE_STATUS=$(aws ec2 describe-instances --instance-ids $INSTANCE_ID --query 'Reservations[0].Instances[0].State.Name' --output text)
             echo "Current instance status: $INSTANCE_STATUS"
@@ -235,7 +233,11 @@ jobs:
             fi
             sleep 10  
           done
-  
+
+                    echo "Iteration #$i completed."
+          echo "----------------------------------------------"
+          done
+
   Production_Environment:
     runs-on: ubuntu-latest
     needs: [Chaos_Engineering]
