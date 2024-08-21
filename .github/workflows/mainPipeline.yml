@@ -197,7 +197,9 @@ jobs:
           echo "FIS_EXP_ID=$FIS_EXP_ID" >> $GITHUB_ENV
 
           echo "Start MTTR Scriptss" 
-
+          ls 
+          pwd
+          ls
           chmod +x ./measure_mttr.sh
            ./measure_mttr.sh &
           echo "Wait for FIS Experiment to Complete"
