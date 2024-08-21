@@ -43,6 +43,18 @@ jobs:
          name: eslint-report
          path: /home/runner/work/L00171125_Dissertationproject/L00171125_Dissertationproject/WWA-backend-master/eslint-report.json
          if-no-files-found: warn
+
+      - name: Run Integration Tests
+        run: |
+          cd /home/runner/work/L00171125_Dissertationproject/L00171125_Dissertationproject/WWA-backend-master
+          npm run test:integration -- --coverage
+
+      - name: Upload Unit Test Coverage Report
+        uses: actions/upload-artifact@v2
+        with:
+         name: unit-test-coverage
+         path: /home/runner/work/L00171125_Dissertationproject/L00171125_Dissertationproject/WWA-backend-master/coverage/
+         if-no-files-found: warn
           
 # Snyk security scan step for web
 
@@ -194,17 +206,17 @@ jobs:
         id: start_fis
         run: |
           for i in {1..2}; do
-          echo "Running Chaos Engineering Experiment Iteration #$i"
-          FIS_EXP_ID=$(aws fis start-experiment --experiment-template-id EXTBY5y1A6MqkfjXn --query 'experiment.id' --output text)
-          echo "FIS_EXP_ID=$FIS_EXP_ID"
-          echo "FIS_EXP_ID=$FIS_EXP_ID" >> $GITHUB_ENV
+           echo "Running Chaos Engineering Experiment Iteration #$i"
+           FIS_EXP_ID=$(aws fis start-experiment --experiment-template-id EXTBY5y1A6MqkfjXn --query 'experiment.id' --output text)
+           echo "FIS_EXP_ID=$FIS_EXP_ID"
+           echo "FIS_EXP_ID=$FIS_EXP_ID" >> $GITHUB_ENV
 
  
 
-          echo "Start MTTR Scriptss" 
-          chmod +x ./measure_mttr.sh
-          ./measure_mttr.sh $FIS_EXP_ID &
-          echo "Wait for FIS Experiment to Complete"
+           echo "Start MTTR Scriptss" 
+           chmod +x ./measure_mttr.sh
+           ./measure_mttr.sh $FIS_EXP_ID &
+            echo "Wait for FIS Experiment to Complete"
             INSTANCE_ID=i-0609b0b289067d17d
             INSTANCE_STATUS=$(aws ec2 describe-instances --instance-ids $INSTANCE_ID --query 'Reservations[0].Instances[0].State.Name' --output text)
             echo "Current instance status: $INSTANCE_STATUS"
@@ -224,7 +236,9 @@ jobs:
             sleep 10
             done
 
-          echo "Wait for EC2 Instance to Return to Running" 
+            echo "dbsahbadbasnfbdafhbsdkfbdsakfdak f kjdasfdskbdkfbsdkfbdskfbdk"
+
+            echo "Wait for EC2 Instance to Return to Running" 
             INSTANCE_ID=i-0609b0b289067d17d
             while true; do
             INSTANCE_STATUS=$(aws ec2 describe-instances --instance-ids $INSTANCE_ID --query 'Reservations[0].Instances[0].State.Name' --output text)
@@ -234,10 +248,10 @@ jobs:
               break
             fi
             sleep 10  
-          done
+           done
 
-                    echo "Iteration #$i completed."
-          echo "----------------------------------------------"
+           echo "Iteration #$i completed."
+           echo "----------------------------------------------"
           done
 
   Production_Environment:
