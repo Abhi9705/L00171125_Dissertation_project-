@@ -177,15 +177,18 @@ jobs:
          # sudo docker pull wwag3/wednesdaywickedadventures:latest
       - name: Kill and Remove Existing Container
         run: |
-          if [ "$(sudo docker ps -q -f name=frontend)" ]; then
-            sudo docker kill frontend
-            fi
-             if [ "$(sudo docker ps -aq -f name=frontend)" ]; then
-              sudo docker stop frontend
-             sudo docker rm frontend
-           fi
-          sudo docker run -d -p 3000:3000 --name forntend wwag3/wednesdaywickedadventures:latest
-      
+          
+          if [ "$(sudo docker ps -q -f name=forntend)" ]; then
+           echo "Stopping and removing existing container 'forntend'."
+           sudo docker stop forntend
+           sudo docker rm forntend
+           elif [ "$(sudo docker ps -aq -f name=forntend)" ]; then
+           echo "Removing existing container 'forntend'."
+           sudo docker rm forntend
+          fi
+
+           echo "Starting new container 'forntend'."
+           sudo docker run -d -p 3000:3000 --name forntend wwag3/wednesdaywickedadventures:latest
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
