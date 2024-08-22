@@ -253,7 +253,7 @@ jobs:
             sleep 15  
            done
 
-           echo "Iteration #$i completed"
+           echo "Iteration #$i completed."
            echo "----------------------------------------------"
           done
 
