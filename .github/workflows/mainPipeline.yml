@@ -212,13 +212,6 @@ jobs:
             echo "FIS_EXP_ID=$FIS_EXP_ID"
 
 
-
-          echo "Start Uptime/Downtime Tracker"
-          chmod +x ./uptime_downtime_tracker.sh
-          ./uptime_downtime_tracker.sh &
-          TRACKER_PID=$!
-
-
             echo "Wait for FIS Experiment to Complete"
             INSTANCE_ID=i-0609b0b289067d17d
 
@@ -260,18 +253,11 @@ jobs:
             sleep 15  
            done
 
-           echo "Stopping Uptime/Downtime Tracker"
-          kill $TRACKER_PID
-
-          echo "Calculate Uptime Percentage"
-          chmod +x ./calculate_uptime_percentage.sh
-          ./calculate_uptime_percentage.sh
-
-           echo "Iteration #$i completed."
+           echo "Iteration #$i completed"
            echo "----------------------------------------------"
           done
 
-          
+
 
   Production_Environment:
     runs-on: ubuntu-latest
