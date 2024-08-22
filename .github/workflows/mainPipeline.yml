@@ -167,6 +167,8 @@ jobs:
     runs-on: self-hosted
    # needs: Build_docker_Images
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
       - name: removing Disk space 
         run: |
          sudo docker system prune -a -f --volumes
@@ -211,7 +213,8 @@ jobs:
 
       - name: Trigger JMeter Tests
         run: |
-          cd /home/ubuntu/project/.github/workflows
+          pwd 
+          ls
           gh workflow run Jmeter.yml -f PUBLIC_IP=$PUBLIC_IP
         env:
          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
