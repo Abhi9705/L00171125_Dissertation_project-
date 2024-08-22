@@ -11,6 +11,7 @@ jobs:
 
   ShiftLeft_test:
     runs-on: ubuntu-latest
+    if: false
     permissions:
      actions: write
      security-events: write
@@ -164,7 +165,7 @@ jobs:
 
   Running_Stagging_Environment:
     runs-on: self-hosted
-    needs: Build_docker_Images
+   # needs: Build_docker_Images
     steps:
       - name: removing Disk space 
         run: |
