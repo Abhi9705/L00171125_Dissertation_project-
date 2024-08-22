@@ -211,7 +211,8 @@ jobs:
 
       - name: Trigger JMeter Tests
         run: |
-          ls pwd
+          ls 
+          pwd
           cd /home/runner/work/L00171125_Dissertationproject/L00171125_Dissertationproject/.github/
           pwd
           gh workflow run JMeter_Performance_Tests.yml -f PUBLIC_IP=$PUBLIC_IP
