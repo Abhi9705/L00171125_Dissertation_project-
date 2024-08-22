@@ -10,7 +10,7 @@ get_instance_status() {
 
 # Log the start time of uptime or downtime
 log_time() {
-    echo "$1: $(date +%s)" >> $LOG_FILE
+    echo "$1 $(date +%s)" >> $LOG_FILE
 }
 
 # Initialize
