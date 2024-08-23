@@ -214,12 +214,7 @@ jobs:
 
       - name: Trigger JMeter Tests
         run: |
-           
-           if [ ! -f test-plan.jmx ]; then
-            echo "Test plan not found!"
-            exit 1
-           fi   
-              rm -rf jmeter-results.jtl jmeter-report           
+          
              jmeter -n -t test-plan.jmx -Jserver=${{ env.PUBLIC_IP }} -Jthreads=10 -l jmeter-results.jtl -g -o jmeter-report
 
   Chaos_Engineering:
