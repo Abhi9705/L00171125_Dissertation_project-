@@ -214,8 +214,9 @@ jobs:
 
       - name: Trigger JMeter Tests
         run: |
-
-            jmeter -n -t test-plan.jmx -Jserver=${{ env.PUBLIC_IP }} -Jthreads=10 -l jmeter-results.jtl
+            pwd 
+            ls
+            jmeter -n -t Jmeter/test-plan.jmx -Jserver=${{ env.PUBLIC_IP }} -Jthreads=10 -l jmeter-results.jtl
             echo "Generate JMeter Report"
             jmeter -g jmeter-results.jtl -e -o jmeter-report
 
