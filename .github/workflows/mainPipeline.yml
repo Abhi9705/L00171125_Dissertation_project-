@@ -211,13 +211,10 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_DEFAULT_REGION: eu-west-1
 
+
       - name: Trigger JMeter Tests
         run: |
-          pwd 
-          ls
-          gh workflow run Jmeter.yml -f PUBLIC_IP=$PUBLIC_IP
-        env:
-         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          jmeter -n -t test-plan.jmx -Jserver=${{ env.PUBLIC_IP }} -Jthreads=10
 
 
 
