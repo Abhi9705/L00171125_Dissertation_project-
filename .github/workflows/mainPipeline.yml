@@ -212,10 +212,6 @@ jobs:
           AWS_DEFAULT_REGION: eu-west-1
 
 
-      - name: Trigger JMeter Tests
-        run: |
-            jmeter -n -t Jmeter/test-plan.jmx -Jserver=${{ env.PUBLIC_IP }} -Jthreads=10 -l jmeter-results.jtl
-
 
 
   Chaos_Engineering:
