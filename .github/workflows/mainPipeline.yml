@@ -214,9 +214,9 @@ jobs:
 
       - name: Trigger JMeter Tests
         run: |
-          jmeter -n -t test-plan.jmx -Jserver=${{ env.PUBLIC_IP }} -Jthreads=10 -l jmeter-results.jtl -e -o jmeter-report
-
-
+              jmeter -n -t test-plan.jmx -Jserver=${{ env.PUBLIC_IP }} -Jthreads=10 -l jmeter-results.jtl
+    
+              jmeter -g jmeter-results.jtl -o jmeter-report
 
   Chaos_Engineering:
     runs-on: ubuntu-latest
