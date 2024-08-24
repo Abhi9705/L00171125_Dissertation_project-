@@ -139,8 +139,8 @@ jobs:
 
   Build_docker_Images:
     runs-on: ubuntu-latest
-    needs: ShiftLeft_test
-    if: false
+   # needs: ShiftLeft_test
+   # if: false
     steps:   
       - name: Checkout codes
         uses: actions/checkout@v4
@@ -166,6 +166,7 @@ jobs:
   Running_Stagging_Environment:
     runs-on: self-hosted
     needs: Build_docker_Images
+   # if: false
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -195,7 +196,7 @@ jobs:
   Chaos_Engineering:
     runs-on: ubuntu-latest
    # needs: Running_Stagging_Environment
-   # if: false
+    if: false
     steps:
       - name: Checkout codes
         uses: actions/checkout@v4
@@ -252,8 +253,6 @@ jobs:
 
             echo "Wait for EC2 Instance to Return to Running" 
             INSTANCE_ID=i-0609b0b289067d17d
-               DELAY=$((6 - i))  # This will set DELAY=5 for iteration 1, DELAY=4 for iteration 2, etc.
-               sleep $(($DELAY * 60))  # Convert delay to seconds
             while true; do
             INSTANCE_STATUS=$(aws ec2 describe-instances --instance-ids $INSTANCE_ID --query 'Reservations[0].Instances[0].State.Name' --output text)
             echo "Current instance status: $INSTANCE_STATUS"
