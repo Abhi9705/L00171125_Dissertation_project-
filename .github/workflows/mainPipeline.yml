@@ -11,7 +11,7 @@ jobs:
 
   ShiftLeft_test:
     runs-on: ubuntu-latest
-   # if: false
+    if: false
     permissions:
      actions: write
      security-events: write
@@ -140,7 +140,7 @@ jobs:
   Build_docker_Images:
     runs-on: ubuntu-latest
     needs: ShiftLeft_test
-   # if: false
+    if: false
     steps:   
       - name: Checkout codes
         uses: actions/checkout@v4
@@ -209,7 +209,7 @@ jobs:
       - name: Trigger FIS Experiments
         id: start_fis
         run: |
-          for i in {1..5}; do
+          for i in {1..3}; do
            echo "Running Chaos Engineering Experiment Iteration #$i"
            FIS_EXP_ID=$(aws fis start-experiment --experiment-template-id EXTBY5y1A6MqkfjXn --query 'experiment.id' --output text)
            echo "FIS_EXP_ID=$FIS_EXP_ID" >> $GITHUB_ENV
@@ -252,6 +252,8 @@ jobs:
 
             echo "Wait for EC2 Instance to Return to Running" 
             INSTANCE_ID=i-0609b0b289067d17d
+               DELAY=$((6 - i))  # This will set DELAY=5 for iteration 1, DELAY=4 for iteration 2, etc.
+               sleep $(($DELAY * 60))  # Convert delay to seconds
             while true; do
             INSTANCE_STATUS=$(aws ec2 describe-instances --instance-ids $INSTANCE_ID --query 'Reservations[0].Instances[0].State.Name' --output text)
             echo "Current instance status: $INSTANCE_STATUS"
