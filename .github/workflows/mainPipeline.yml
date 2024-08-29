@@ -11,7 +11,7 @@ jobs:
 
   ShiftLeft_test:
     runs-on: ubuntu-latest
-    if: false
+   # if: false
     permissions:
      actions: write
      security-events: write
@@ -52,7 +52,7 @@ jobs:
          path: /home/runner/work/L00171125_Dissertationproject/L00171125_Dissertationproject/WWA-backend-master/coverage/
          if-no-files-found: warn
           
-# Snyk security scan step for web
+# Snyk security scan 
 
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -85,8 +85,6 @@ jobs:
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         working-directory: WWA-frontend-master
-                
-  # Snyk security scan step for Code Scanning
 
       - name: Run Snyk to check for vulnerabilitie
         uses: snyk/actions/node@master
@@ -139,8 +137,8 @@ jobs:
 
   Build_docker_Images:
     runs-on: ubuntu-latest
-   # needs: ShiftLeft_test
-    if: false
+    needs: ShiftLeft_test
+   # if: false
     steps:   
       - name: Checkout codes
         uses: actions/checkout@v4
@@ -165,7 +163,7 @@ jobs:
 
   Running_Stagging_Environment:
     runs-on: self-hosted
-   # needs: Build_docker_Images
+    needs: Build_docker_Images
    # if: false
     steps:
       - name: Checkout code
@@ -195,8 +193,8 @@ jobs:
 
   Chaos_Engineering:
     runs-on: ubuntu-latest
-   # needs: Running_Stagging_Environment
-    if: false
+    needs: Running_Stagging_Environment
+   # if: false
     steps:
       - name: Checkout codes
         uses: actions/checkout@v4
@@ -210,7 +208,7 @@ jobs:
       - name: Trigger FIS Experiments
         id: start_fis
         run: |
-          for i in {1..3}; do
+          for i in {1..2}; do
            echo "Running Chaos Engineering Experiment Iteration #$i"
            FIS_EXP_ID=$(aws fis start-experiment --experiment-template-id EXTBY5y1A6MqkfjXn --query 'experiment.id' --output text)
            echo "FIS_EXP_ID=$FIS_EXP_ID" >> $GITHUB_ENV
@@ -271,8 +269,8 @@ jobs:
 
   Production_Environment:
     runs-on: ubuntu-latest
-    if: false
-  #  needs: [Chaos_Engineering]
+   # if: false
+    needs: [Chaos_Engineering]
     permissions: write-all
     outputs:
      target_url: ${{ steps.running-terraform-commands.outputs.target }}
@@ -306,7 +304,7 @@ jobs:
          echo "##[group]Terraform Output"
          cat terraform_output.txt
          echo "##[endgroup]"
-      #  terraform destroy -auto-approve
+        # terraform destroy -auto-approve
 
  
   # Pulling_docker_image:
